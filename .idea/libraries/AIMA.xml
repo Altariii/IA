@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="AIMA">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Entrega1/Libraries/AIMA.jar!/" />
+      <root url="file://$PROJECT_DIR$/Entrega1/Libraries/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/Entrega1/Libraries/lib" recursive="false" />
+  </library>
+</component>
