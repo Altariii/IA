@@ -3,8 +3,8 @@ package IA;
 import IA.Gasolina.*;
 import aima.util.Pair;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
+import java.lang.Math;
 import IA.DataStructures.Camion;
 
 public class GenerateState {
@@ -14,15 +14,88 @@ public class GenerateState {
     int NUM_KILOM = 640;
     int NUM_DEPOSITOS = 2;
 
-    // Calcula la distancia entre un centro de un camion y una gasolinera
-    int calcular_distancia(Pair p, Gasolinera g) {
-        return 0;
+    // Calcula la distancia entre dos posiciones
+    int calcular_distancia(Pair a, Pair b) {
+        return Math.abs((int)a.getFirst() - (int)b.getFirst()) + Math.abs((int)a.getSecond() - (int)b.getSecond());
     }
+
+    // Asigna peticiones a los camiones que esten mas cerca de esa peticion
+    ArrayList<Camion> asignar_peticiones(ArrayList<Camion> camiones, ArrayList<Pair> peticiones, Gasolineras gas) {
+        for (int i = 0; i < camiones.size(); i++) {
+            Pair posicion_gasolinera = new Pair(gas.get((int)peticiones.get(0).getSecond()).getCoordX(), gas.get((int)peticiones.get(0).getSecond()).getCoordY());
+            int min_distancia = calcular_distancia(camiones.get(i).getPosicion(), posicion_gasolinera);
+            int peticion_asignada = 0;
+            for (int j = 1; j < peticiones.size(); j++) {
+                posicion_gasolinera = new Pair(gas.get((int)peticiones.get(j).getSecond()).getCoordX(), gas.get((int)peticiones.get(j).getSecond()).getCoordY());
+                int distancia = calcular_distancia(camiones.get(i).getPosicion(), posicion_gasolinera);
+                if (distancia < min_distancia) {
+                    min_distancia = distancia;
+                    peticion_asignada = j;
+                }
+            }
+            camiones.get(i).setPeticion(peticion_asignada);
+        }
+        return camiones;
+    }
+
+    // Cuando se ha asignado una peticion a cada camion, se descuentan los quilometros, el numero de viajes, etc.
+    /*
+    ArrayList<Camion> descontar_peticiones(ArrayList<Camion> camiones, ArrayList<Pair> peticiones, Gasolineras gas, CentrosDistribucion cd) {
+        for (int i = 0; i < camiones.size(); i++) {
+
+
+	si mi numero de viajes es 0:
+		si el numero de quilometros que me quedan menos la distancia hasta la siguiente posicion menos la distancia hasta el centro es menor que 0:
+			volver al centro de distribucion
+			quitar camion
+		si no:
+			si me queda combustible:
+				ir al siguiente punto
+				descontar quilometros
+				quitar peticion del camion y del vector
+			si no:
+				volver al centro de distribucion
+				quitar camion
+				mantener peticion en el vector de peticiones
+
+	si mi numero de viajes es mayor que 0:
+		si el numero de quilometros que me quedan menos la distancia hasta la siguiente posicion menos la distancia hasta el centro es menor que 0:
+			volver al centro de distribucion
+			descontar quilometros
+			quitar camion
+		si no:
+			si me queda combustible:
+				ir al siguiente punto
+				descontar quilometros
+				quitar peticion del camion y del vector
+			si no:
+				volver al centro de distribucion
+				restar uno al numero de viajes
+				descontar quilometros
+				mantener peticion en el vector de posiciones
+
+
+        }
+    }
+
+     */
 
     // Imprime las peticiones indicando el número de gasolinera y el número de días desde que se ha solicitado
     void print_peticiones(ArrayList<Pair> peticiones) {
         for(int i = 0; i < peticiones.size(); i++) {
             System.out.println("Gasolinera num." + peticiones.get(i).getSecond() + ", dias: " + peticiones.get(i).getFirst());
+        }
+    }
+
+    // Imprime la información de un camión
+    void print_camiones(ArrayList<Camion> camiones) {
+        for(int i = 0; i < camiones.size(); i++) {
+            System.out.println("Camion numero " + i + ":");
+            System.out.println("    viajes restantes: " + camiones.get(i).getNum_viajes());
+            System.out.println("    kilometros restantes: " + camiones.get(i).getKilometros());
+            System.out.println("    depositos restantes: " + camiones.get(i).getDepositocamion());
+            System.out.println("    peticion activa del camion: " + camiones.get(i).getPeticion());
+            System.out.println("    Posicion del camion: " + camiones.get(i).getPosicion() + "\n");
         }
     }
 
@@ -45,10 +118,20 @@ public class GenerateState {
             }
         });
 
+        // Inicializar camiones
         ArrayList<Camion> Camiones = new ArrayList<Camion>();
         for (int i = 0; i < cd.size(); i++) {
-            Camiones.add(new Camion(NUM_VIAJES, NUM_KILOM, NUM_DEPOSITOS, new ArrayList<Integer>()));
+            Pair posicion_camion = new Pair(cd.get(i).getCoordX(), cd.get(i).getCoordY());
+            Camiones.add(new Camion(NUM_VIAJES, NUM_KILOM, NUM_DEPOSITOS, -1, posicion_camion));
         }
+
+        // Calcular solucion
+        while(Camiones.size() > 0) {
+            Camiones = asignar_peticiones(Camiones, sorted_peticiones, gas);
+            //Camiones = descontar_peticiones(Camiones, sorted_peticiones, gas, cd);
+            print_camiones(Camiones);
+        }
+
 
     }
 }
