@@ -1,4 +1,4 @@
-import Libraries.Gasolina;
+import Gasolina;
 import java.util.Random;
 
 public class Main {
@@ -16,5 +16,4 @@ public class Main {
             System.out.println(g.getCoordX());
         }
     }
-
 }
