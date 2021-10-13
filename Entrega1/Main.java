@@ -1,4 +1,4 @@
-import Gasolina;
+import IA.Gasolina.*;
 import java.util.Random;
 
 public class Main {
