@@ -13,7 +13,7 @@ public class Main {
         Gasolineras new_gasolineras = new Gasolineras(NUM_GAS, seed.nextInt(GAS_MAX));
         for(int i = 0; i < new_gasolineras.size(); i++) {
             Gasolinera g = new_gasolineras.get(i);
-            System.out.println(g.getCoordX());
+            System.out.println(g.getCoordY());
         }
     }
 }
