@@ -7,7 +7,7 @@ public class Main {
 
         Random seed = new Random();
         int GAS_MAX = 100;
-        // NUM_GAS Luego se cambia por args[0]
+        // NUM_GAS Luego se cambia por args[0] aaa
         int NUM_GAS = 20;
 
         Gasolineras new_gasolineras = new Gasolineras(NUM_GAS, seed.nextInt(GAS_MAX));
