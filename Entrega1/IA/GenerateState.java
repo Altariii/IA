@@ -3,18 +3,27 @@ package IA;
 import IA.Gasolina.*;
 import aima.util.Pair;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import IA.DataStructures.Camion;
 
 public class GenerateState {
 
+    // Constantes
+    int NUM_VIAJES = 5;
+    int NUM_KILOM = 640;
+    int NUM_DEPOSITOS = 2;
+
+    // Calcula la distancia entre un centro de un camion y una gasolinera
+    int calcular_distancia(Pair p, Gasolinera g) {
+        return 0;
+    }
+
+    // Imprime las peticiones indicando el número de gasolinera y el número de días desde que se ha solicitado
     void print_peticiones(ArrayList<Pair> peticiones) {
         for(int i = 0; i < peticiones.size(); i++) {
             System.out.println("Gasolinera num." + peticiones.get(i).getSecond() + ", dias: " + peticiones.get(i).getFirst());
         }
-    }
-
-    int calcular_distancia(Distribucion d, Gasolinera g) {
-        return 0;
     }
 
     public GenerateState(Gasolineras gas, CentrosDistribucion cd) {
@@ -27,6 +36,7 @@ public class GenerateState {
             }
         }
 
+        // Peticiones ordenadas por dias
         sorted_peticiones.sort(new Comparator<Pair>() {
             @Override
             public int compare(Pair o1, Pair o2) {
@@ -35,7 +45,10 @@ public class GenerateState {
             }
         });
 
-
+        ArrayList<Camion> Camiones = new ArrayList<Camion>();
+        for (int i = 0; i < cd.size(); i++) {
+            Camiones.add(new Camion(NUM_VIAJES, NUM_KILOM, NUM_DEPOSITOS, new ArrayList<Integer>()));
+        }
 
     }
 }
