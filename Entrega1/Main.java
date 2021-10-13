@@ -7,13 +7,14 @@ public class Main {
 
         Random seed = new Random();
         int GAS_MAX = 100;
-        // NUM_GAS Luego se cambia por args[0] a
+        // NUM_GAS Luego se cambia por args[0]
         int NUM_GAS = 20;
+        // NUM_CENTR Luebo se cambia por args[1]
+        int NUM_CENTR = 3;
 
         Gasolineras new_gasolineras = new Gasolineras(NUM_GAS, seed.nextInt(GAS_MAX));
-        for(int i = 0; i < new_gasolineras.size(); i++) {
-            Gasolinera g = new_gasolineras.get(i);
-            System.out.println(g.getCoordY());
+        CentrosDistribucion new_centros = new CentrosDistribucion(NUM_CENTR, 1, seed.nextInt(GAS_MAX));
+
         }
     }
 }
