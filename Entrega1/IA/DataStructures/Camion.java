@@ -7,7 +7,7 @@ public class Camion {
     int num_viajes;
     int kilometros;
     int depositocamion;
-    int Peticion;
+    ArrayList<Integer> Peticiones;
     Pair posicion;
 
     public int getNum_viajes() {
@@ -22,8 +22,8 @@ public class Camion {
         return depositocamion;
     }
 
-    public int getPeticion() {
-        return Peticion;
+    public ArrayList<Integer> getPeticiones() {
+        return Peticiones;
     }
 
     public Pair getPosicion() {
@@ -42,19 +42,19 @@ public class Camion {
         this.depositocamion = depositocamion;
     }
 
-    public void setPeticion(int Peticion) {
-        this.Peticion = Peticion;
+    public void setPeticiones(ArrayList<Integer> Peticiones) {
+        this.Peticiones = Peticiones;
     }
 
     public void setPosicion(Pair posicion) {
         this.posicion = posicion;
     }
 
-    public Camion(int num_viajes, int kilometros, int depositocamion, int Peticion, Pair posicion) {
+    public Camion(int num_viajes, int kilometros, int depositocamion, ArrayList<Integer> Peticiones, Pair posicion) {
         this.num_viajes = num_viajes;
         this.kilometros = kilometros;
         this.depositocamion = depositocamion;
-        this.Peticion = Peticion;
+        this.Peticiones = Peticiones;
         this.posicion = posicion;
     }
 
