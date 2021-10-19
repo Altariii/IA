@@ -39,11 +39,11 @@ public class Camion {
         return distanciaRecorrida;
     }
 
-    // Operadores
+    //
 
-    public boolean AddPeticion(Peticion peticion) {
+    public int comprueba_peticion(Peticion peticion) {
         int peticiones = viajesCamion.size();
-        if (peticiones >= 10) return false;
+        if (peticiones >= 10) return -1;
         int distancia = 0;
         if (peticiones % 2 != 0) {
             // Calcular distancia gasolinera1 - gasolinera2 + volver al centro
@@ -56,7 +56,15 @@ public class Camion {
             // Calcular distancia de centro a gasolinera
             distancia = 2 * calcular_distancia_centro_gasolinera(peticion.getGasolinera());
         }
-        if (distancia + distanciaRecorrida > 640) return false;
+        if (distancia + distanciaRecorrida > 640) return -1;
+        return distancia;
+    }
+
+    // Operadores
+
+    public boolean AddPeticion(Peticion peticion) {
+        int distancia = comprueba_peticion(peticion);
+        if (distancia == -1) return false;
         distanciaRecorrida += distancia;
         viajesCamion.add(peticion);
         beneficioViajes += peticion.getBeneficio();
