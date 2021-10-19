@@ -49,13 +49,14 @@ public class Camion {
         int distancia = 0;
         if (peticiones % 2 != 0) {
             // Calcular distancia gasolinera1 - gasolinera2 + volver al centro
+            // restamos la anterior que habiamos sumado dos veces por si era la ultima peticion por atender
             Gasolinera g1 = viajesCamion.get(peticiones - 1).getGasolinera();
             Gasolinera g2 = peticion.getGasolinera();
-            distancia = calcular_distancia_gasolineras(g1, g2) + calcular_distancia_centro_gasolinera(g2);
+            distancia = calcular_distancia_gasolineras(g1, g2) + calcular_distancia_centro_gasolinera(g2) - calcular_distancia_centro_gasolinera(g1);
         }
         else {
             // Calcular distancia de centro a gasolinera
-            distancia = calcular_distancia_centro_gasolinera(peticion.getGasolinera());
+            distancia = 2 * calcular_distancia_centro_gasolinera(peticion.getGasolinera());
         }
         if (distancia + distanciaRecorrida > 640) return false;
         distanciaRecorrida += distancia;
@@ -84,8 +85,16 @@ public class Camion {
                 distancia += calcular_distancia_gasolineras(g1, g2);
                 nueva_distancia += calcular_distancia_gasolineras(nueva_gasolinera, g2);
             }
+            else {
+                distancia += calcular_distancia_centro_gasolinera(g1);
+                nueva_distancia += calcular_distancia_centro_gasolinera(nueva_gasolinera);
+            }
         }
-
+        if (distanciaRecorrida - distancia + nueva_distancia > 640) return false;
+        distanciaRecorrida -= distancia; distanciaRecorrida += nueva_distancia;
+        beneficioViajes -= viajesCamion.get(i).getBeneficio(); beneficioViajes += peticion.getBeneficio();
+        viajesCamion.set(i, peticion);
+        return true;
     }
 
     // Funciones auxiliares
@@ -95,6 +104,17 @@ public class Camion {
 
     public int calcular_distancia_centro_gasolinera(Gasolinera g) {
         return Math.abs(centroCamion.getCoordX() - g.getCoordX()) + Math.abs(centroCamion.getCoordY() - g.getCoordY());
+    }
+
+    // Funcion print
+    public void print_viajes_camion() {
+        System.out.println("Viajes programados del centro de distribucion: (" + centroCamion.getCoordX() + "," + centroCamion.getCoordY() + "):");
+        for (int i = 0; i < viajesCamion.size(); i++) {
+            if (i % 2 == 0) System.out.println("Viaje " + (i / 2) + 1 + ":");
+            System.out.print("    Se llena el deposito de la gasolinera (" + viajesCamion.get(i).getGasolinera().getCoordX() + "," + viajesCamion.get(i).getGasolinera().getCoordY() + "). ");
+            System.out.println("Llevaba " + viajesCamion.get(i).getDias() + " dias sin atender.");
+        }
+        System.out.println("Distancia recorrida durante el dia: " + distanciaRecorrida + "km. Beneficio diario obtenido: " + beneficioViajes + "eur.");
     }
 
 }
