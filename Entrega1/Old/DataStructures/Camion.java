@@ -1,4 +1,4 @@
-package IA.DataStructures;
+package Old.DataStructures;
 
 import aima.util.Pair;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ public class Camion {
     int depositocamion;
     ArrayList<Integer> Peticiones;
     Pair posicion;
+    Pair posicion_centro;
 
     public int getNum_viajes() {
         return num_viajes;
@@ -30,6 +31,8 @@ public class Camion {
         return posicion;
     }
 
+    public Pair getPosicion_centro() { return posicion_centro; }
+
     public void setNum_viajes(int num_viajes) {
         this.num_viajes = num_viajes;
     }
@@ -50,12 +53,15 @@ public class Camion {
         this.posicion = posicion;
     }
 
-    public Camion(int num_viajes, int kilometros, int depositocamion, ArrayList<Integer> Peticiones, Pair posicion) {
+    public void setPosicion_centro(Pair posicion_centro) { this.posicion_centro = posicion_centro; }
+
+    public Camion(int num_viajes, int kilometros, int depositocamion, ArrayList<Integer> Peticiones, Pair posicion, Pair posicion_centro) {
         this.num_viajes = num_viajes;
         this.kilometros = kilometros;
         this.depositocamion = depositocamion;
         this.Peticiones = Peticiones;
         this.posicion = posicion;
+        this.posicion_centro = posicion_centro;
     }
 
 }
