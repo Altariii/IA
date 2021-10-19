@@ -59,6 +59,10 @@ public class Estado {
         this.TotalPerdidas = TotalPerdidas;
     }
 
+    public Estado clona_estado() {
+        return new Estado(centros, gasolineras, Camiones, Peticiones, TotalPerdidas);
+    }
+
     // Getters
 
     public CentrosDistribucion getCentros() {
@@ -81,7 +85,7 @@ public class Estado {
         return TotalPerdidas;
     }
 
-    public double getTotalBeneficio() {
+    public int getTotalBeneficio() {
         int beneficio = 0;
         for (Camion camion : Camiones) beneficio += camion.getBeneficioViajes() - (camion.getDistanciaRecorrida() * 2);
         return beneficio - TotalPerdidas;
