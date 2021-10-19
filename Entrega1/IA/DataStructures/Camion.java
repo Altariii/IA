@@ -2,8 +2,6 @@ package IA.DataStructures;
 
 import IA.Gasolina.Distribucion;
 import IA.Gasolina.Gasolinera;
-import org.jfree.chart.renderer.xy.DeviationRenderer;
-
 import java.util.ArrayList;
 
 
