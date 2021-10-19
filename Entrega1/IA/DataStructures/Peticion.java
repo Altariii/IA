@@ -1,6 +1,13 @@
 package IA.DataStructures;
 
-import IA.Gasolina.*;
+import IA.Gasolina.Gasolinera;
+
+/*
+    Clase peticion: contiene la gasolinera que la solicita y los dias desde que se produjo la solicitud.
+    Ademas, implementa un metodo para obtener el beneficio de atender la peticion y otro metodo para
+    obtener las perdidas de no atender esa peticion durante el dia
+ */
+
 
 public class Peticion {
 
