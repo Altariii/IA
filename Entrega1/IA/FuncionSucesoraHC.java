@@ -28,10 +28,12 @@ public class FuncionSucesoraHC implements SuccessorFunction{
             for (int j = 0; j < estado.getCamiones().get(i).getViajesCamion().size(); j++) {
                 for (int k = i; k < n_camiones; k++) {
                     for (int l = 0; l < estado.getCamiones().get(k).getViajesCamion().size(); l++) {
-                        // if (
-                        Estado estado_sucesor = estado.clona_estado();
-                        if (estado_sucesor.swapPeticionesCamiones(i, j, k, l)) {
-                            sucesores.add(new Successor("Peticion " + (j+1) + " del camion" + (i+1) + " cambiada por peticion " + (l+1) + " del camion " + (k+1), estado_sucesor));
+                        // Estamos intentando cambiar dos peticiones de un mismo viaje de orden
+                        if (!(i == k && (j % 2 == 0 && l == j + 1 || j % 2 != 0 && l == j - 1))) {
+                            Estado estado_sucesor = estado.clona_estado();
+                            if (estado_sucesor.swapPeticionesCamiones(i, j, k, l)) {
+                                sucesores.add(new Successor("Peticion " + (j + 1) + " del camion" + (i + 1) + " cambiada por peticion " + (l + 1) + " del camion " + (k + 1), estado_sucesor));
+                            }
                         }
                     }
                 }
