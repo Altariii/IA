@@ -13,6 +13,7 @@ public class Estado {
     private Gasolineras gasolineras;
     private ArrayList<Camion> Camiones;
     private ArrayList<Peticion> Peticiones;
+    private int numPeticiones;
     private int TotalPerdidas;
 
     // Constructor
@@ -21,6 +22,7 @@ public class Estado {
         this.gasolineras = gasolineras;
         Camiones = new ArrayList<Camion>();
         Peticiones = new ArrayList<Peticion>();
+        numPeticiones = Peticiones.size();
 
         for (Gasolinera gasolinera : gasolineras) {
             ArrayList<Integer> Peticiones_gasolinera = gasolinera.getPeticiones();
@@ -51,16 +53,17 @@ public class Estado {
 
     }
 
-    public Estado(CentrosDistribucion centros, Gasolineras gasolineras, ArrayList<Camion> Camiones, ArrayList<Peticion> Peticiones, int TotalPerdidas) {
+    public Estado(CentrosDistribucion centros, Gasolineras gasolineras, ArrayList<Camion> Camiones, ArrayList<Peticion> Peticiones, int numPeticiones, int TotalPerdidas) {
         this.centros = centros;
         this.gasolineras = gasolineras;
         this.Camiones = Camiones;
         this.Peticiones = Peticiones;
+        this.numPeticiones = numPeticiones;
         this.TotalPerdidas = TotalPerdidas;
     }
 
     public Estado clona_estado() {
-        return new Estado(centros, gasolineras, Camiones, Peticiones, TotalPerdidas);
+        return new Estado(centros, gasolineras, Camiones, Peticiones, numPeticiones, TotalPerdidas);
     }
 
     // Getters
@@ -80,6 +83,8 @@ public class Estado {
     public ArrayList<Peticion> getPeticiones() {
         return Peticiones;
     }
+
+    public int getNumPeticiones() { return numPeticiones; }
 
     public int getTotalPerdidas() {
         return TotalPerdidas;
