@@ -22,7 +22,7 @@ public class FuncionSucesoraSA implements SuccessorFunction {
         int RandUpperBound = 2;
         boolean sucesorViable = false;
 
-        while (sucesorViable == false) {
+        while (!sucesorViable) {
 
             // Solo se puede usar swapViajes
             if (estado.getPeticiones().size() == 0) {
@@ -40,12 +40,13 @@ public class FuncionSucesoraSA implements SuccessorFunction {
 
             Estado estado_sucesor = estado.clona_estado();
 
+            // Falta ver si un sucesor es viable
             switch (randomNum) {
                 case 0:
                     // Add
-                    if (estado_sucesor.addPeticion_Camion(numCamion, numPeticion)) {
+                    if (estado_sucesor.addPeticion_Camion(numCamion, numPeticionCamion)) {
                         sucesorViable = true;
-                        sucesor.add(new Successor("Centro " + (numCamion+1) + ", nueva peticion" + (numPeticion+1) + " Beneficio: " + estado.getTotalBeneficio(), estado_sucesor));
+                        sucesor.add(new Successor("Centro " + (numCamion+1) + ", nueva peticion" + (numPeticionCamion+1) + " Beneficio: " + estado.getTotalBeneficio(), estado_sucesor));
                     }
                     break;
 
@@ -53,13 +54,18 @@ public class FuncionSucesoraSA implements SuccessorFunction {
                     // SwapPeticionNoAtendida
                     if (estado_sucesor.swapPeticionNoAtendida(numCamion, numPeticionCamion, numPeticionNoAtendida)) {
                         sucesorViable = true;
-                        sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion" + (numCamion+1) + " cambiada por peticion no atendida" + (numPeticionNoAtendida+1), estado_sucesor));
+                        sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion no atendida " + (numPeticionNoAtendida+1), estado_sucesor));
                     }
                     break;
 
                 case 2:
                     // SwapPeticionesCamiones
-                    //int numCamion2 = getRandomNum(0, )
+                    int numCamion2 = getRandomNum(0, estado.getCamiones().size() - 1);
+                    int numPeticion2 = getRandomNum(0, estado.getCamiones().get(numCamion2).getViajesCamion().size() - 1);
+                    if (estado_sucesor.swapPeticionesCamiones(numCamion, numPeticionCamion, numCamion2, numPeticion2)) {
+                        sucesorViable = true;
+                        sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion " + (numPeticion2) + " del camion " + (numCamion2), estado_sucesor));
+                    }
                     break;
             }
         }
