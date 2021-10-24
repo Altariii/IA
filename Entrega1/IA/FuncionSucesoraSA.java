@@ -24,6 +24,10 @@ public class FuncionSucesoraSA implements SuccessorFunction {
 
         while (!sucesorViable) {
 
+            int numCamion = getRandomNum(0, estado.getCamiones().size() - 1);
+            int numPeticionCamion = getRandomNum(0, estado.getCamiones().get(numCamion).getViajesCamion().size() - 1);
+            int numPeticionNoAtendida = getRandomNum(0, estado.getPeticiones().size() - 1);
+
             // Solo se puede usar swapViajes
             if (estado.getPeticiones().size() == 0) {
                 RandLowerBound = 2;
@@ -34,9 +38,6 @@ public class FuncionSucesoraSA implements SuccessorFunction {
             }
 
             int randomNum = getRandomNum(RandLowerBound, RandUpperBound);
-            int numCamion = getRandomNum(0, estado.getCamiones().size() - 1);
-            int numPeticionCamion = getRandomNum(0, estado.getCamiones().get(numCamion).getViajesCamion().size() - 1);
-            int numPeticionNoAtendida = getRandomNum(0, estado.getPeticiones().size() - 1);
 
             Estado estado_sucesor = estado.clona_estado();
 
@@ -62,6 +63,7 @@ public class FuncionSucesoraSA implements SuccessorFunction {
                     // SwapPeticionesCamiones
                     int numCamion2 = getRandomNum(0, estado.getCamiones().size() - 1);
                     int numPeticion2 = getRandomNum(0, estado.getCamiones().get(numCamion2).getViajesCamion().size() - 1);
+
                     if (estado_sucesor.swapPeticionesCamiones(numCamion, numPeticionCamion, numCamion2, numPeticion2)) {
                         sucesorViable = true;
                         sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion " + (numPeticion2) + " del camion " + (numCamion2), estado_sucesor));
@@ -74,6 +76,8 @@ public class FuncionSucesoraSA implements SuccessorFunction {
 
     private int getRandomNum(int LowerBound, int UpperBound) {
         Random num = new Random();
+        // .size() = 0
+        if (UpperBound < 0) return -1;
         return num.nextInt((UpperBound - LowerBound) + 1) + LowerBound;
     }
 }
