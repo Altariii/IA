@@ -21,7 +21,7 @@ public class Main {
         Gasolineras gasolineras = new Gasolineras(num_gas, seed);
 
         //ESTADO INICIAL
-        Estado inicial = new Estado(centros, gasolineras, true);
+        Estado inicial = new Estado(centros, gasolineras, false);
         Problem problema;
         Search algoritmo;
 
