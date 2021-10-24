@@ -108,6 +108,7 @@ public class Estado {
     }
 
     public boolean swapPeticionesCamiones(int index_camion1, int index_peticion1, int index_camion2, int index_peticion2) {
+        if (index_camion1 == -1 || index_camion2 == -1 || index_peticion1 == -1 || index_peticion2 == -1) return false;
         Peticion peticion1 = Camiones.get(index_camion1).getViajesCamion().get(index_peticion1);
         Peticion peticion2 = Camiones.get(index_camion2).getViajesCamion().get(index_peticion2);
         return Camiones.get(index_camion1).SwapPeticion(index_peticion1, peticion2) && Camiones.get(index_camion2).SwapPeticion(index_peticion2, peticion1);
