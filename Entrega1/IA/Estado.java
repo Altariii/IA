@@ -155,6 +155,7 @@ public class Estado {
             @Override
             public int compare(Peticion p1, Peticion p2) {
                 if (p1.getDias() > p2.getDias()) return -1;
+                else if (p1.getDias() == p2.getDias()) return 0;
                 else return 1;
             }
         });
