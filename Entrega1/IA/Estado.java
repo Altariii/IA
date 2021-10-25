@@ -103,6 +103,7 @@ public class Estado {
 
     // Operadores
     public boolean addPeticion_Camion(int index_camion, int index_peticion) {
+        if (index_camion == -1 ||index_peticion == -1) return false;
         Peticion peticion = Peticiones.get(index_peticion);
         if (Camiones.get(index_camion).AddPeticion(peticion)) {
             TotalPerdidas -= peticion.getPerdidas();
@@ -120,6 +121,7 @@ public class Estado {
     }
 
     public boolean swapPeticionNoAtendida(int index_camion, int index_peticion1, int index_peticion2) {
+        if (index_camion == -1 || index_peticion1 == -1 || index_peticion2 == -1) return false;
         Camion camion = Camiones.get(index_camion);
         Peticion nueva_peticion = Peticiones.get(index_peticion2);
         Peticion peticion_activa = camion.getViajesCamion().get(index_peticion1);

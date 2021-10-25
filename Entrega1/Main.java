@@ -16,12 +16,12 @@ public class Main {
         int seed = 1234; //num.nextInt(100);
         int num_cd = 10;
         int num_gas = 100;
-        boolean hill_climbing = true;
+        boolean hill_climbing = false;
         CentrosDistribucion centros = new CentrosDistribucion(num_cd, 1, seed);
         Gasolineras gasolineras = new Gasolineras(num_gas, seed);
 
         //ESTADO INICIAL
-        Estado inicial = new Estado(centros, gasolineras, false);
+        Estado inicial = new Estado(centros, gasolineras, true);
         Problem problema;
         Search algoritmo;
 
@@ -41,7 +41,7 @@ public class Main {
 
 
         //RESULTADOS
-        if (hill_climbing) pinta_acciones(agent.getActions());
+        /*if (hill_climbing)*/ pinta_acciones(agent.getActions());
         pinta_Instrumentacion(agent.getInstrumentation());
         System.out.println("Tiempo de ejecucion: " + (System.currentTimeMillis() - tiempo) + "ms");
 
