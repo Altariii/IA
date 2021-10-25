@@ -21,7 +21,7 @@ public class Main {
         Gasolineras gasolineras = new Gasolineras(num_gas, seed);
 
         //ESTADO INICIAL
-        Estado inicial = new Estado(centros, gasolineras, true);
+        Estado inicial = new Estado(centros, gasolineras, false);
         Problem problema;
         Search algoritmo;
 
@@ -41,7 +41,7 @@ public class Main {
 
 
         //RESULTADOS
-        /*if (hill_climbing)*/ pinta_acciones(agent.getActions());
+        if (hill_climbing) pinta_acciones(agent.getActions());
         pinta_Instrumentacion(agent.getInstrumentation());
         System.out.println("Tiempo de ejecucion: " + (System.currentTimeMillis() - tiempo) + "ms");
 
