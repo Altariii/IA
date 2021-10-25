@@ -9,7 +9,7 @@ import java.util.Random;
 public class FuncionSucesoraSA implements SuccessorFunction {
 
     public List getSuccessors(Object state) {
-        ArrayList sucesor = new ArrayList();
+        ArrayList<Successor> sucesor = new ArrayList();
         Estado estado = (Estado) state;
 
         /*
@@ -45,9 +45,10 @@ public class FuncionSucesoraSA implements SuccessorFunction {
             switch (randomNum) {
                 case 0:
                     // Add
-                    if (estado_sucesor.addPeticion_Camion(numCamion, numPeticionCamion)) {
+                    if (estado_sucesor.addPeticion_Camion(numCamion, numPeticionNoAtendida)) {
                         sucesorViable = true;
-                        sucesor.add(new Successor("Centro " + (numCamion+1) + ", nueva peticion" + (numPeticionCamion+1) + " Beneficio: " + estado.getTotalBeneficio(), estado_sucesor));
+                        sucesor.add(new Successor("Centro " + (numCamion+1) + ", nueva peticion" + (numPeticionNoAtendida+1) + " Beneficio: " + estado_sucesor.getTotalBeneficio(), estado_sucesor));
+                        System.out.println("Centro " + (numCamion+1) + ", nueva peticion " + (numPeticionNoAtendida+1) + " Beneficio: " + estado_sucesor.getTotalBeneficio());
                     }
                     break;
 
@@ -55,7 +56,8 @@ public class FuncionSucesoraSA implements SuccessorFunction {
                     // SwapPeticionNoAtendida
                     if (estado_sucesor.swapPeticionNoAtendida(numCamion, numPeticionCamion, numPeticionNoAtendida)) {
                         sucesorViable = true;
-                        sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion no atendida " + (numPeticionNoAtendida+1), estado_sucesor));
+                        sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion no atendida " + (numPeticionNoAtendida+1) + " Beneficio: " + estado_sucesor.getTotalBeneficio(), estado_sucesor));
+                        System.out.println("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion no atendida " + (numPeticionNoAtendida+1) + " Beneficio: " + estado_sucesor.getTotalBeneficio());
                     }
                     break;
 
@@ -66,7 +68,8 @@ public class FuncionSucesoraSA implements SuccessorFunction {
 
                     if (estado_sucesor.swapPeticionesCamiones(numCamion, numPeticionCamion, numCamion2, numPeticion2)) {
                         sucesorViable = true;
-                        sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion " + (numPeticion2) + " del camion " + (numCamion2), estado_sucesor));
+                        sucesor.add(new Successor("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion " + (numPeticion2) + " del camion " + (numCamion2) + " Beneficio: " + estado_sucesor.getTotalBeneficio(), estado_sucesor));
+                        System.out.println("Peticion " + (numPeticionCamion+1) + " del camion " + (numCamion+1) + " cambiada por peticion " + (numPeticion2) + " del camion " + (numCamion2) + " Beneficio: " + estado_sucesor.getTotalBeneficio());
                     }
                     break;
             }
