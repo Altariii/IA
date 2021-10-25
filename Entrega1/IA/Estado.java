@@ -50,8 +50,8 @@ public class Estado {
                 }
             }
         }
-        System.out.println("Estado Inicial:");
-        print_camiones();
+        //System.out.println("Estado Inicial:");
+        //print_camiones();
 
     }
 

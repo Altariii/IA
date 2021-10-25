@@ -18,10 +18,10 @@ public class FuncionSucesoraHC implements SuccessorFunction{
                 estado_sucesor = estado.clona_estado();
                 if (estado_sucesor.addPeticion_Camion(i, j)) {
                     sucesores.add(new Successor("Centro " + (i+1) + ", nueva peticion " + (j+1) + " Beneficio: " + estado.getTotalBeneficio(), estado_sucesor));
-                    System.out.println("Estado Inicial suc:");
+                    /*System.out.println("Estado Inicial suc:");
                     estado.print_camiones();
                     System.out.println("Estado sucessor:");
-                    estado_sucesor.print_camiones();
+                    estado_sucesor.print_camiones();*/
                 }
             }
         }
