@@ -22,7 +22,6 @@ public class Estado {
         this.gasolineras = gasolineras;
         Camiones = new ArrayList<Camion>();
         Peticiones = new ArrayList<Peticion>();
-        numPeticiones = Peticiones.size();
 
         for (Gasolinera gasolinera : gasolineras) {
             ArrayList<Integer> Peticiones_gasolinera = gasolinera.getPeticiones();
@@ -32,6 +31,8 @@ public class Estado {
                 TotalPerdidas += nueva_peticion.getPerdidas();
             }
         }
+
+        numPeticiones = Peticiones.size();
 
         // Estado inicial vacio
         for (Distribucion centro : centros) Camiones.add(new Camion(centro));
