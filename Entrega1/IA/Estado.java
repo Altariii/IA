@@ -58,8 +58,10 @@ public class Estado {
     public Estado(CentrosDistribucion centros, Gasolineras gasolineras, ArrayList<Camion> Camiones, ArrayList<Peticion> Peticiones, int numPeticiones, int TotalPerdidas) {
         this.centros = centros;
         this.gasolineras = gasolineras;
-        this.Camiones = Camiones;
-        this.Peticiones = Peticiones;
+        this.Camiones = new ArrayList<Camion>();
+        for (int i = 0; i < Camiones.size(); i ++) this.Camiones.add(Camiones.get(i).clonaCamion());
+        this.Peticiones = new ArrayList<Peticion>();
+        for (int i = 0; i < Peticiones.size(); i ++) this.Peticiones.add(Peticiones.get(i));
         this.numPeticiones = numPeticiones;
         this.TotalPerdidas = TotalPerdidas;
     }

@@ -22,6 +22,17 @@ public class Camion {
         distanciaRecorrida = 0;
     }
 
+    public Camion(Distribucion centroCamion, ArrayList<Peticion> viajesCamion, int beneficioViajes, int distanciaRecorrida){
+        this.centroCamion = centroCamion;
+        this.viajesCamion =  (ArrayList<Peticion>)viajesCamion.clone();
+        this.beneficioViajes = beneficioViajes;
+        this.distanciaRecorrida = distanciaRecorrida;
+    }
+
+    public Camion clonaCamion() {
+        return new Camion(this.centroCamion, this.viajesCamion, this.beneficioViajes, this.distanciaRecorrida);
+    }
+
     // Getters
     public Distribucion getCentroCamion() {
         return centroCamion;

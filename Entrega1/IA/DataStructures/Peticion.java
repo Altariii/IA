@@ -21,6 +21,7 @@ public class Peticion {
         this.dias = dias;
     }
 
+
     // Getters
     public Gasolinera getGasolinera() {
         return g;
