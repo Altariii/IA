@@ -50,6 +50,8 @@ public class Estado {
                 }
             }
         }
+        System.out.println("Estado Inicial:");
+        print_camiones();
 
     }
 
@@ -65,6 +67,7 @@ public class Estado {
     public Estado clona_estado() {
         return new Estado(centros, gasolineras, Camiones, Peticiones, numPeticiones, TotalPerdidas);
     }
+
 
     // Getters
 

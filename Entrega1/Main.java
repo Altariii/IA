@@ -14,14 +14,14 @@ public class Main {
         //PARAMETROS
         Random num = new Random();
         int seed = 1234; //num.nextInt(100);
-        int num_cd = 10;
-        int num_gas = 95;
+        int num_cd = 3;
+        int num_gas = 10;
         boolean hill_climbing = true;
         CentrosDistribucion centros = new CentrosDistribucion(num_cd, 1, seed);
         Gasolineras gasolineras = new Gasolineras(num_gas, seed);
 
         //ESTADO INICIAL
-        Estado inicial = new Estado(centros, gasolineras, true);
+        Estado inicial = new Estado(centros, gasolineras, false);
         Problem problema;
         Search algoritmo;
 
@@ -44,6 +44,7 @@ public class Main {
         if (hill_climbing) pinta_acciones(agent.getActions());
         pinta_Instrumentacion(agent.getInstrumentation());
         System.out.println("Tiempo de ejecucion: " + (System.currentTimeMillis() - tiempo) + "ms");
+
     }
 
     //FUNCIONES PRIVADAS

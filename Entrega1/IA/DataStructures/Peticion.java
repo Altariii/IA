@@ -28,6 +28,7 @@ public class Peticion {
     public int getDias() {
         return dias;
     }
+
     public int getBeneficio() {
 
         // Retorna el beneficio de atender una peticion
