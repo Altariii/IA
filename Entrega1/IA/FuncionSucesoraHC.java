@@ -41,18 +41,6 @@ public class FuncionSucesoraHC implements SuccessorFunction{
                     }
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
         }
         // Operador SwapPeticionNoAtendida
         for (int i = 0; i < estado.getCamiones().size(); i++) {
