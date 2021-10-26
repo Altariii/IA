@@ -13,37 +13,45 @@ public class Main {
 
         //PARAMETROS
         Random num = new Random();
-        int seed = 1234; //num.nextInt(100);
+        int seed = /* 1234; */ num.nextInt(10000);
         int num_cd = 10;
         int num_gas = 100;
-        boolean hill_climbing = false;
+        boolean hill_climbing = true;
+        boolean solucion_compleja = false;
         CentrosDistribucion centros = new CentrosDistribucion(num_cd, 1, seed);
         Gasolineras gasolineras = new Gasolineras(num_gas, seed);
 
-        //ESTADO INICIAL
-        Estado inicial = new Estado(centros, gasolineras, false);
-        Problem problema;
-        Search algoritmo;
+        System.out.println("SEED: " + seed);
+        for (int i = 0; i < 2; i++) {
+            if (solucion_compleja) System.out.println("Solucion compleja: ");
+            else System.out.println("Solucion simple: ");
 
-        if (hill_climbing) {
-            problema = new Problem(inicial, new FuncionSucesoraHC(), new IAGoalTest(), new FuncionHeurisitica());
-            algoritmo = new HillClimbingSearch();
+
+            //ESTADO INICIAL
+            Estado inicial = new Estado(centros, gasolineras, solucion_compleja);
+            Problem problema;
+            Search algoritmo;
+
+            if (hill_climbing) {
+                problema = new Problem(inicial, new FuncionSucesoraHC(), new IAGoalTest(), new FuncionHeurisitica());
+                algoritmo = new HillClimbingSearch();
+            } else {
+                problema = new Problem(inicial, new FuncionSucesoraSA(), new IAGoalTest(), new FuncionHeurisitica());
+                algoritmo = new SimulatedAnnealingSearch(1000, 10, 100, 0.01);
+            }
+
+            double tiempo = System.currentTimeMillis();
+
+            SearchAgent agent = new SearchAgent(problema, algoritmo);
+
+
+            //RESULTADOS
+            if (hill_climbing) pinta_acciones(agent.getActions());
+            pinta_Instrumentacion(agent.getInstrumentation());
+            System.out.println("Tiempo de ejecucion: " + (System.currentTimeMillis() - tiempo) + "ms");
+
+            solucion_compleja = !solucion_compleja;
         }
-
-        else {
-            problema = new Problem(inicial, new FuncionSucesoraSA(), new IAGoalTest(), new FuncionHeurisitica());
-            algoritmo = new SimulatedAnnealingSearch(1000,10,100,0.01);
-        }
-
-        double tiempo = System.currentTimeMillis();
-
-        SearchAgent agent = new SearchAgent(problema,algoritmo);
-
-
-        //RESULTADOS
-        if (hill_climbing) pinta_acciones(agent.getActions());
-        pinta_Instrumentacion(agent.getInstrumentation());
-        System.out.println("Tiempo de ejecucion: " + (System.currentTimeMillis() - tiempo) + "ms");
 
     }
 
