@@ -27,6 +27,7 @@ public class FuncionSucesoraHC implements SuccessorFunction{
         }
 
         // Operador SwapPeticionesCamiones
+        /*
         for (int i = 0; i < estado.getCamiones().size(); i++) {
             for (int j = 0; j < estado.getCamiones().get(i).getViajesCamion().size(); j++) {
                 for (int k = i; k < estado.getCamiones().size(); k++) {
@@ -41,7 +42,7 @@ public class FuncionSucesoraHC implements SuccessorFunction{
                     }
                 }
             }
-        }
+        }*/
         // Operador SwapPeticionNoAtendida
         for (int i = 0; i < estado.getCamiones().size(); i++) {
             for (int j = 0; j < estado.getCamiones().get(i).getViajesCamion().size(); j++) {
