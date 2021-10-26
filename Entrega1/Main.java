@@ -46,7 +46,7 @@ public class Main {
 
 
             //RESULTADOS
-            if (hill_climbing) pinta_acciones(agent.getActions());
+            if (hill_climbing) System.out.println(agent.getActions().get(agent.getActions().size()-1));/* pinta_acciones(agent.getActions()); */
             pinta_Instrumentacion(agent.getInstrumentation());
             System.out.println("Tiempo de ejecucion: " + (System.currentTimeMillis() - tiempo) + "ms");
 
