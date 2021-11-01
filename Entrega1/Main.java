@@ -12,6 +12,11 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+        System.out.println("Bienvenido, para empezar la simulación con 20 seeds pulse ENTER");
+
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+
         //PARAMETROS
         ArrayList<Integer> seeds = new ArrayList<Integer>(List.of(17, 94, 64, 2132, 2422, 2154, 2685, 2379, 6195, 9522, 2564, 1175, 7421, 4458, 5417, 8563, 7618, 1329, 8782, 4253));
         int num_cd = 10;
