@@ -102,6 +102,12 @@ public class Estado {
         return beneficio - TotalPerdidas;
     }
 
+    public int getDistanciaRecorrida() {
+        int distancia_total = 0;
+        for (Camion camion : Camiones) distancia_total += camion.getDistanciaRecorrida();
+        return distancia_total;
+    }
+
     // Operadores
     public boolean addPeticion_Camion(int index_camion, int index_peticion) {
         if (index_camion == -1 ||index_peticion == -1) return false;

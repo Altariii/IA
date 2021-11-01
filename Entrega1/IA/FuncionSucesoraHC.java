@@ -11,23 +11,25 @@ public class FuncionSucesoraHC implements SuccessorFunction{
         ArrayList<Successor> sucesores = new ArrayList();
         Estado estado = (Estado) state;
         Estado estado_sucesor = null;
-
         // Operador ADD
         for (int i = 0; i < estado.getCamiones().size(); i++) {
             for (int j = 0; j < estado.getPeticiones().size(); j++) {
                 estado_sucesor = estado.clona_estado();
                 if (estado_sucesor.addPeticion_Camion(i, j)) {
-                    sucesores.add(new Successor("Centro " + (i+1) + ", nueva peticion " + (j+1) + " Beneficio: " + estado_sucesor.getTotalBeneficio(), estado_sucesor));
+                    sucesores.add(new Successor("" + estado_sucesor.getTotalBeneficio()/*"Centro " + (i+1) + ", nueva peticion " + (j+1) + " Beneficio: " + estado_sucesor.getTotalBeneficio() + " Numero Peticiones: " + (estado_sucesor.getNumPeticiones() - estado_sucesor.getPeticiones().size())*/, estado_sucesor));
                     /*System.out.println("Estado Inicial suc:");
                     estado.print_camiones();
                     System.out.println("Estado sucessor:");
-                    estado_sucesor.print_camiones();*/
+                    estado_sucesor.print_camiones();
+                    */
+
+
                 }
             }
         }
 
         // Operador SwapPeticionesCamiones
-        /*
+
         for (int i = 0; i < estado.getCamiones().size(); i++) {
             for (int j = 0; j < estado.getCamiones().get(i).getViajesCamion().size(); j++) {
                 for (int k = i; k < estado.getCamiones().size(); k++) {
@@ -36,13 +38,14 @@ public class FuncionSucesoraHC implements SuccessorFunction{
                         if (!(i == k && (j % 2 == 0 && l == j + 1 || j % 2 != 0 && l == j - 1))) {
                             estado_sucesor = estado.clona_estado();
                             if (estado_sucesor.swapPeticionesCamiones(i, j, k, l)) {
-                                sucesores.add(new Successor("Peticion " + (j + 1) + " del camion " + (i + 1) + " cambiada por peticion " + (l + 1) + " del camion " + (k + 1)+ " Beneficio: " + estado_sucesor.getTotalBeneficio(), estado_sucesor));
+                                sucesores.add(new Successor("" + estado_sucesor.getTotalBeneficio()/*"Peticion " + (j + 1) + " del camion " + (i + 1) + " cambiada por peticion " + (l + 1) + " del camion " + (k + 1)+ " Beneficio: " + estado_sucesor.getTotalBeneficio() + " Numero Peticiones: " + (estado_sucesor.getNumPeticiones() - estado_sucesor.getPeticiones().size())*/, estado_sucesor));
                             }
                         }
                     }
                 }
             }
-        }*/
+        }
+        /*
         // Operador SwapPeticionNoAtendida
         for (int i = 0; i < estado.getCamiones().size(); i++) {
             for (int j = 0; j < estado.getCamiones().get(i).getViajesCamion().size(); j++) {
@@ -54,6 +57,12 @@ public class FuncionSucesoraHC implements SuccessorFunction{
                 }
             }
         }
+
+         */
+
+
+
+
         return sucesores;
     }
 
